@@ -9,7 +9,7 @@ const StyledView = styled.View(({ theme }) => ({
 }));
 
 const StyledText = styled.Text({
-  fontSize: 30,
+  fontSize: 32,
 });
 
 const Signup = () => {

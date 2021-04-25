@@ -4,11 +4,11 @@ import styled from '@emotion/native';
 
 const StyledView = styled.View({
   alignSelf: 'center',
-  marginBottom: 30,
+  marginBottom: 32,
 });
 
 const StyledImage = styled.Image(({ theme }) => ({
-  backgroundColor: theme.color.imageBackground,
+  backgroundColor: theme.color.image.background,
   width: 100,
   height: 100,
 }));

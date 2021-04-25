@@ -5,7 +5,14 @@ declare module '@emotion/react' {
     color: {
       background: '#ffffff';
       text: '#000000';
-      imageBackground: '#d5d5d5';
+      label: '#a6a6a6';
+      image: {
+        background: '#d5d5d5';
+      };
+      input: {
+        placeholder: '#a6a6a6';
+        border: '#a6a6a6';
+      };
     };
   }
 }

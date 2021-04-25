@@ -30,6 +30,7 @@
     "comma-dangle": "off",
     "react/prop-types": "off",
     "operator-linebreak": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-unused-vars": "off"
   }
 }
