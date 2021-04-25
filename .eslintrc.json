@@ -21,6 +21,10 @@
     "arrow-body-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/style-prop-object": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "global-require": "off"
   }
 }
