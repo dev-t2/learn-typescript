@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
 import { Image } from '../components';
+import image from '../utils/image';
 
 const StyledView = styled.View(({ theme }) => ({
   flex: 1,
@@ -21,7 +22,7 @@ const Login = () => {
 
   return (
     <StyledView>
-      <Image />
+      <Image uri={image.logo} />
 
       <Pressable onPress={onPress}>
         <Text>Signup</Text>

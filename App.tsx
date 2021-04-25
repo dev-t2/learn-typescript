@@ -5,13 +5,17 @@ import { ThemeProvider } from '@emotion/react';
 
 import Navigation from './src/navigations';
 import { cacheFonts, cacheImages } from './src/utils/cache';
+import image from './src/utils/image';
 import theme from './src/theme';
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
 
   const startAsync = useCallback(async () => {
-    const imageAssets = cacheImages([require('./assets/splash.png')]);
+    const imageAssets = cacheImages([
+      require('./assets/splash.png'),
+      ...Object.values(image),
+    ]);
     const fontAssets = cacheFonts([]);
 
     await Promise.all([...imageAssets, ...fontAssets]);

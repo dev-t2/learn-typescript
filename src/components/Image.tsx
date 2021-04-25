@@ -14,7 +14,7 @@ const StyledImage = styled.Image(({ theme }) => ({
 }));
 
 interface IImage {
-  style: StyleProp<ImageStyle>;
+  style?: StyleProp<ImageStyle>;
   uri: string;
 }
 
