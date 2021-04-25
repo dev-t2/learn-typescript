@@ -4,6 +4,7 @@ const theme: Theme = {
   color: {
     background: '#ffffff',
     text: '#000000',
+    imageBackground: '#d5d5d5',
   },
 };
 
