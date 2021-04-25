@@ -1,9 +1,11 @@
 import React, { memo, useCallback, useState } from 'react';
-import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
+import { ThemeProvider } from '@emotion/react';
 
+import Navigation from './src/navigations';
 import { cacheFonts, cacheImages } from './src/utils/cache';
+import theme from './src/theme';
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
@@ -20,9 +22,11 @@ const App = () => {
   }, []);
 
   return isReady ? (
-    <View>
+    <ThemeProvider theme={theme}>
       <StatusBar style="dark" />
-    </View>
+
+      <Navigation />
+    </ThemeProvider>
   ) : (
     <AppLoading
       startAsync={startAsync}
