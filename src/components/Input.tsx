@@ -1,5 +1,5 @@
-import React, { FC, memo, useCallback, useState } from 'react';
-import { ReturnKeyTypeOptions } from 'react-native';
+import React, { forwardRef, memo, useCallback, useState } from 'react';
+import { ReturnKeyTypeOptions, TextInput } from 'react-native';
 import styled from '@emotion/native';
 
 const StyledView = styled.View({
@@ -42,51 +42,57 @@ interface IInput {
   onSubmitEditing?: () => void;
 }
 
-const Input: FC<IInput> = ({
-  label,
-  value,
-  placeholder,
-  isPassword = false,
-  returnKeyType,
-  maxLength = 30,
-  onBlur = () => {},
-  onChangeText,
-  onSubmitEditing = () => {},
-}) => {
-  const [isFocused, setIsFocused] = useState(false);
+const Input = forwardRef<TextInput, IInput>(
+  (
+    {
+      label,
+      value,
+      placeholder,
+      isPassword = false,
+      returnKeyType,
+      maxLength = 30,
+      onBlur = () => {},
+      onChangeText,
+      onSubmitEditing = () => {},
+    },
+    ref
+  ) => {
+    const [isFocused, setIsFocused] = useState(false);
 
-  const onFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
+    const onFocus = useCallback(() => {
+      setIsFocused(true);
+    }, []);
 
-  const onBlurInput = useCallback(() => {
-    setIsFocused(false);
+    const onBlurInput = useCallback(() => {
+      setIsFocused(false);
 
-    onBlur();
-  }, [onBlur]);
+      onBlur();
+    }, [onBlur]);
 
-  return (
-    <StyledView>
-      <StyledText isFocused={isFocused}>{label}</StyledText>
+    return (
+      <StyledView>
+        <StyledText isFocused={isFocused}>{label}</StyledText>
 
-      <StyledTextInput
-        isFocused={isFocused}
-        value={value}
-        placeholder={placeholder}
-        secureTextEntry={isPassword}
-        returnKeyType={returnKeyType}
-        maxLength={maxLength}
-        autoCapitalize="none"
-        autoCorrect={false}
-        textContentType="none"
-        underlineColorAndroid="transparent"
-        onFocus={onFocus}
-        onBlur={onBlurInput}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-      />
-    </StyledView>
-  );
-};
+        <StyledTextInput
+          ref={ref}
+          isFocused={isFocused}
+          value={value}
+          placeholder={placeholder}
+          secureTextEntry={isPassword}
+          returnKeyType={returnKeyType}
+          maxLength={maxLength}
+          autoCapitalize="none"
+          autoCorrect={false}
+          textContentType="none"
+          underlineColorAndroid="transparent"
+          onFocus={onFocus}
+          onBlur={onBlurInput}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+        />
+      </StyledView>
+    );
+  }
+);
 
 export default memo(Input);

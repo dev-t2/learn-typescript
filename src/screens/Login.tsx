@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useState } from 'react';
-
+import React, { memo, useCallback, useRef, useState } from 'react';
+import { TextInput } from 'react-native';
 import styled from '@emotion/native';
 
 import { Image, Input } from '../components';
@@ -17,11 +17,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const passwordRef = useRef<TextInput>(null);
+
   const onChangeEmail = useCallback(text => {
     setEmail(text);
   }, []);
 
-  const onSubmitEmail = useCallback(() => {}, []);
+  const onSubmitEmail = useCallback(() => {
+    passwordRef.current?.focus();
+  }, []);
 
   const onChangePassword = useCallback(text => {
     setPassword(text);
@@ -41,6 +45,7 @@ const Login = () => {
       />
 
       <Input
+        ref={passwordRef}
         label="비밀번호"
         isPassword
         value={password}
