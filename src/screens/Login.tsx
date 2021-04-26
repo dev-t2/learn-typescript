@@ -1,5 +1,6 @@
-import React, { memo, useCallback, useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { StyleProp, TextInput, ViewStyle } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from '@emotion/native';
 
 import { Image, Input } from '../components';
@@ -19,6 +20,11 @@ const Login = () => {
 
   const passwordRef = useRef<TextInput>(null);
 
+  const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(
+    () => ({ flex: 1 }),
+    []
+  );
+
   const onChangeEmail = useCallback(text => {
     setEmail(text);
   }, []);
@@ -32,28 +38,30 @@ const Login = () => {
   }, []);
 
   return (
-    <StyledView>
-      <Image uri={image.logo} />
+    <KeyboardAwareScrollView contentContainerStyle={contentContainerStyle}>
+      <StyledView>
+        <Image uri={image.logo} />
 
-      <Input
-        label="이메일"
-        value={email}
-        placeholder="이메일을 입력하세요."
-        returnKeyType="next"
-        onChangeText={onChangeEmail}
-        onSubmitEditing={onSubmitEmail}
-      />
+        <Input
+          label="이메일"
+          value={email}
+          placeholder="이메일을 입력하세요."
+          returnKeyType="next"
+          onChangeText={onChangeEmail}
+          onSubmitEditing={onSubmitEmail}
+        />
 
-      <Input
-        ref={passwordRef}
-        label="비밀번호"
-        isPassword
-        value={password}
-        placeholder="비밀번호를 입력하세요."
-        returnKeyType="done"
-        onChangeText={onChangePassword}
-      />
-    </StyledView>
+        <Input
+          ref={passwordRef}
+          label="비밀번호"
+          isPassword
+          value={password}
+          placeholder="비밀번호를 입력하세요."
+          returnKeyType="done"
+          onChangeText={onChangePassword}
+        />
+      </StyledView>
+    </KeyboardAwareScrollView>
   );
 };
 

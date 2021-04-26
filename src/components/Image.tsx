@@ -9,8 +9,8 @@ const StyledView = styled.View({
 
 const StyledImage = styled.Image(({ theme }) => ({
   backgroundColor: theme.color.image.background,
-  width: 100,
-  height: 100,
+  width: 120,
+  height: 120,
 }));
 
 interface IImage {
