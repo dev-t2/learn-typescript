@@ -18,6 +18,9 @@ declare module '@emotion/react' {
         background: '#3679fe';
         title: '#ffffff';
       };
+      header: {
+        Tint: '#000000';
+      };
     };
   }
 }

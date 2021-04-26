@@ -16,14 +16,25 @@ export default memo(() => {
     () => ({
       headerTitleAlign: 'center',
       cardStyle: { backgroundColor: theme.color.background },
+      headerTintColor: theme.color.header.Tint,
     }),
     [theme]
   );
 
+  const loginOptions: StackNavigationOptions = useMemo(
+    () => ({ headerShown: false }),
+    []
+  );
+
+  const signupOptions: StackNavigationOptions = useMemo(
+    () => ({ headerBackTitleVisible: false }),
+    []
+  );
+
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Login" component={Login} options={loginOptions} />
+      <Stack.Screen name="Signup" component={Signup} options={signupOptions} />
     </Stack.Navigator>
   );
 });

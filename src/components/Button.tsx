@@ -14,7 +14,7 @@ const StyledPressable = styled.Pressable<IStyled>(
     width: '100%',
     padding: 8,
     borderRadius: 4,
-    opacity: disabled ? 0.5 : 1,
+    opacity: disabled ? 0.8 : 1,
   })
 );
 

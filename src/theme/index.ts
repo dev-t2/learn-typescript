@@ -17,6 +17,9 @@ const theme: Theme = {
       background: '#3679fe',
       title: '#ffffff',
     },
+    header: {
+      Tint: '#000000',
+    },
   },
 };
 
