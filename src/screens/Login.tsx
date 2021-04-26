@@ -5,18 +5,29 @@ import styled from '@emotion/native';
 
 import { Image, Input } from '../components';
 import image from '../utils/image';
+import { removeWhiteSpace, validateEmail } from '../utils/common';
 
 const StyledView = styled.View(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: theme.color.background,
-  padding: 18,
+  padding: 16,
+}));
+
+const StyledText = styled.Text(({ theme }) => ({
+  alignItems: 'flex-start',
+  width: '100%',
+  height: 16,
+  lineHeight: 16,
+  marginBottom: 8,
+  color: theme.color.error,
 }));
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const passwordRef = useRef<TextInput>(null);
 
@@ -25,16 +36,21 @@ const Login = () => {
     []
   );
 
-  const onChangeEmail = useCallback(text => {
-    setEmail(text);
-  }, []);
-
   const onSubmitEmail = useCallback(() => {
     passwordRef.current?.focus();
   }, []);
 
+  const onChangeEmail = useCallback(text => {
+    const withoutSpaceEmail = removeWhiteSpace(text);
+    const validatedEmail = validateEmail(withoutSpaceEmail);
+
+    setEmail(withoutSpaceEmail);
+    setError(validatedEmail ? '' : '이메일을 확인해주세요.');
+  }, []);
+
   const onChangePassword = useCallback(text => {
-    setPassword(text);
+    const withoutSpacePassword = removeWhiteSpace(text);
+    setPassword(withoutSpacePassword);
   }, []);
 
   return (
@@ -50,6 +66,8 @@ const Login = () => {
           onChangeText={onChangeEmail}
           onSubmitEditing={onSubmitEmail}
         />
+
+        {error !== '' && <StyledText>{error}</StyledText>}
 
         <Input
           ref={passwordRef}
