@@ -14,7 +14,7 @@ const theme: Theme = {
       border: '#a6a6a6',
     },
     button: {
-      background: '#3679fe',
+      background: '#2196F3',
       title: '#ffffff',
     },
     header: {

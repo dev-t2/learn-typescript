@@ -7,21 +7,27 @@ const StyledView = styled.View({
   marginBottom: 32,
 });
 
-const StyledImage = styled.Image(({ theme }) => ({
+interface IStyledImage {
+  isRounded: boolean;
+}
+
+const StyledImage = styled.Image<IStyledImage>(({ theme, isRounded }) => ({
   backgroundColor: theme.color.image.background,
   width: 120,
   height: 120,
+  borderRadius: isRounded ? 60 : 0,
 }));
 
 interface IImage {
   style?: StyleProp<ImageStyle>;
+  isRounded?: boolean;
   uri: string;
 }
 
-const Image: FC<IImage> = ({ style, uri }) => {
+const Image: FC<IImage> = ({ style, isRounded = false, uri }) => {
   return (
     <StyledView>
-      <StyledImage style={style} source={{ uri }} />
+      <StyledImage style={style} isRounded={isRounded} source={{ uri }} />
     </StyledView>
   );
 };
