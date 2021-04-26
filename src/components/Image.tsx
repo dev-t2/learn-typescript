@@ -13,9 +13,9 @@ interface IStyledImage {
 
 const StyledImage = styled.Image<IStyledImage>(({ theme, isRounded }) => ({
   backgroundColor: theme.color.image.background,
-  width: 120,
-  height: 120,
-  borderRadius: isRounded ? 60 : 0,
+  width: 100,
+  height: 100,
+  borderRadius: isRounded ? 50 : 0,
 }));
 
 interface IImage {

@@ -1,25 +1,18 @@
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { StyleProp, TextInput, ViewStyle } from 'react-native';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from '@emotion/native';
 
 import { Button, Image, Input } from '../components';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
 
-const StyledView = styled.View(({ theme }) => ({
+const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: theme.color.background,
-  paddingVertical: 0,
-  paddingHorizontal: 16,
+  paddingVertical: 40,
+  paddingHorizontal: 24,
 }));
 
 const StyledText = styled.Text(({ theme }) => ({
@@ -43,11 +36,6 @@ const Signup = () => {
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const passwordCheckRef = useRef<TextInput>(null);
-
-  const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(
-    () => ({ flex: 1 }),
-    []
-  );
 
   useEffect(() => {
     let error = '';
@@ -104,8 +92,8 @@ const Signup = () => {
   const onPress = useCallback(() => {}, []);
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={contentContainerStyle}>
-      <StyledView>
+    <KeyboardAwareScrollView>
+      <StyledSafeAreaView>
         <Image isRounded />
 
         <Input
@@ -152,7 +140,7 @@ const Signup = () => {
         <StyledText>{error}</StyledText>
 
         <Button title="회원가입" disabled={disabled} onPress={onPress} />
-      </StyledView>
+      </StyledSafeAreaView>
     </KeyboardAwareScrollView>
   );
 };

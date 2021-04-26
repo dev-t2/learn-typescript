@@ -21,7 +21,7 @@ const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   alignItems: 'center',
   backgroundColor: theme.color.background,
   paddingVertical: 0,
-  paddingHorizontal: 16,
+  paddingHorizontal: 24,
 }));
 
 const StyledText = styled.Text(({ theme }) => ({
