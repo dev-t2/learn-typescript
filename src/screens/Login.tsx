@@ -15,12 +15,13 @@ import { Button, Image, Input } from '../components';
 import image from '../utils/image';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
 
-const StyledView = styled.View(({ theme }) => ({
+const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: theme.color.background,
-  padding: 16,
+  paddingVertical: 0,
+  paddingHorizontal: 16,
 }));
 
 const StyledText = styled.Text(({ theme }) => ({
@@ -77,7 +78,7 @@ const Login = () => {
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={contentContainerStyle}>
-      <StyledView>
+      <StyledSafeAreaView>
         <Image uri={image.logo} />
 
         <Input
@@ -103,7 +104,7 @@ const Login = () => {
 
         <Button title="로그인" disabled={disabled} onPress={onPressLogin} />
         <Button title="회원가입" isFilled={false} onPress={onPressSignup} />
-      </StyledView>
+      </StyledSafeAreaView>
     </KeyboardAwareScrollView>
   );
 };
