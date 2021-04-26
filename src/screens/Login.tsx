@@ -1,9 +1,17 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { StyleProp, TextInput, ViewStyle } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
-import { Image, Input } from '../components';
+import { Button, Image, Input } from '../components';
 import image from '../utils/image';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
 
@@ -20,14 +28,18 @@ const StyledText = styled.Text(({ theme }) => ({
   width: '100%',
   height: 16,
   lineHeight: 16,
-  marginBottom: 8,
   color: theme.color.error,
+  marginLeft: 8,
+  marginBottom: 24,
 }));
 
 const Login = () => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
   const passwordRef = useRef<TextInput>(null);
 
@@ -35,6 +47,10 @@ const Login = () => {
     () => ({ flex: 1 }),
     []
   );
+
+  useEffect(() => {
+    setDisabled(!(email && password && !error));
+  }, [email, password, error]);
 
   const onSubmitEmail = useCallback(() => {
     passwordRef.current?.focus();
@@ -53,6 +69,12 @@ const Login = () => {
     setPassword(withoutSpacePassword);
   }, []);
 
+  const onPressLogin = useCallback(() => {}, []);
+
+  const onPressSignup = useCallback(() => {
+    navigation.navigate('Signup');
+  }, [navigation]);
+
   return (
     <KeyboardAwareScrollView contentContainerStyle={contentContainerStyle}>
       <StyledView>
@@ -67,8 +89,6 @@ const Login = () => {
           onSubmitEditing={onSubmitEmail}
         />
 
-        {error !== '' && <StyledText>{error}</StyledText>}
-
         <Input
           ref={passwordRef}
           label="비밀번호"
@@ -78,6 +98,11 @@ const Login = () => {
           returnKeyType="done"
           onChangeText={onChangePassword}
         />
+
+        <StyledText>{error}</StyledText>
+
+        <Button title="로그인" disabled={disabled} onPress={onPressLogin} />
+        <Button title="회원가입" isFilled={false} onPress={onPressSignup} />
       </StyledView>
     </KeyboardAwareScrollView>
   );

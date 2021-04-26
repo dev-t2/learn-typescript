@@ -13,6 +13,10 @@ const theme: Theme = {
       placeholder: '#a6a6a6',
       border: '#a6a6a6',
     },
+    button: {
+      background: '#3679fe',
+      title: '#ffffff',
+    },
   },
 };
 

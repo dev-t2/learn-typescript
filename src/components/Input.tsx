@@ -5,7 +5,7 @@ import styled from '@emotion/native';
 const StyledView = styled.View({
   flexDirection: 'column',
   width: '100%',
-  marginVertical: 16,
+  marginBottom: 16,
 });
 
 interface IStyled {
@@ -13,21 +13,23 @@ interface IStyled {
 }
 
 const StyledText = styled.Text<IStyled>(({ theme, isFocused }) => ({
-  fontSize: 16,
+  fontSize: 12,
   fontWeight: '600',
-  marginBottom: 8,
   color: isFocused ? theme.color.text : theme.color.label,
+  marginBottom: 4,
+  marginLeft: 4,
 }));
 
 const StyledTextInput = styled.TextInput<IStyled>(({ theme, isFocused }) => ({
   backgroundColor: theme.color.background,
   color: theme.color.text,
-  padding: 16,
+  paddingHorizontal: 24,
+  paddingVertical: 12,
   fontSize: 16,
   borderWidth: 1,
   borderStyle: 'solid',
   borderColor: isFocused ? theme.color.text : theme.color.input.border,
-  borderRadius: 4,
+  borderRadius: 8,
 }));
 
 interface IInput {
