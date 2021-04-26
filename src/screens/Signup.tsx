@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styled from '@emotion/native';
 
 import { Button, Image, Input } from '../components';
+import image from '../utils/image';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
 
 const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
@@ -26,6 +27,7 @@ const StyledText = styled.Text(({ theme }) => ({
 }));
 
 const Signup = () => {
+  const [uri, setUri] = useState(image.photo);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -64,6 +66,10 @@ const Signup = () => {
     setDisabled(!(name && email && password && passwordCheck && !error));
   }, [name, email, password, passwordCheck, error]);
 
+  const onChangeImage = useCallback(uri => {
+    setUri(uri);
+  }, []);
+
   const onChangeName = useCallback(text => {
     setName(text);
   }, []);
@@ -99,7 +105,7 @@ const Signup = () => {
   return (
     <KeyboardAwareScrollView>
       <StyledSafeAreaView>
-        <Image isRounded />
+        <Image isRounded isShowButton uri={uri} onChangeImage={onChangeImage} />
 
         <Input
           label="이름"

@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
+import { MaterialIcons } from '@expo/vector-icons';
 import { ThemeProvider } from '@emotion/react';
 
 import Navigation from './src/navigations';
@@ -16,7 +17,7 @@ const App = () => {
       require('./assets/splash.png'),
       ...Object.values(image),
     ]);
-    const fontAssets = cacheFonts([]);
+    const fontAssets = cacheFonts([MaterialIcons.font]);
 
     await Promise.all([...imageAssets, ...fontAssets]);
   }, []);

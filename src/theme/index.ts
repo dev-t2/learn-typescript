@@ -8,6 +8,8 @@ const theme: Theme = {
     error: '#e84118',
     image: {
       background: '#d5d5d5',
+      button: '#a6a6a6',
+      icon: '#ffffff',
     },
     input: {
       placeholder: '#a6a6a6',
