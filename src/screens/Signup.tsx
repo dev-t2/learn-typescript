@@ -33,26 +33,31 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
 
+  const didMountRef = useRef(false);
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const passwordCheckRef = useRef<TextInput>(null);
 
   useEffect(() => {
-    let error = '';
+    if (didMountRef.current) {
+      let error = '';
 
-    if (!name) {
-      error = '이름을 입력해주세요.';
-    } else if (!validateEmail(email)) {
-      error = '이메일을 확인해주세요.';
-    } else if (password.length < 6) {
-      error = '비밀번호는 6자리 이상이어야 합니다.';
-    } else if (password !== passwordCheck) {
-      error = '비밀번호가 일치해야 합니다.';
+      if (!name) {
+        error = '이름을 입력해주세요.';
+      } else if (!validateEmail(email)) {
+        error = '이메일을 확인해주세요.';
+      } else if (password.length < 6) {
+        error = '비밀번호는 6자리 이상이어야 합니다.';
+      } else if (password !== passwordCheck) {
+        error = '비밀번호가 일치해야 합니다.';
+      } else {
+        error = '';
+      }
+
+      setError(error);
     } else {
-      error = '';
+      didMountRef.current = true;
     }
-
-    setError(error);
   }, [name, email, password, passwordCheck]);
 
   useEffect(() => {
