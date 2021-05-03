@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { StyleProp, TextInput, ViewStyle } from 'react-native';
+import { Alert, StyleProp, TextInput, ViewStyle } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
@@ -14,6 +14,7 @@ import styled from '@emotion/native';
 import { Button, Image, Input } from '../components';
 import image from '../utils/image';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
+import { login } from '../utils/firebase';
 
 const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   flex: 1,
@@ -70,7 +71,17 @@ const Login = () => {
     setPassword(withoutSpacePassword);
   }, []);
 
-  const onPressLogin = useCallback(() => {}, []);
+  const onPressLogin = useCallback(async () => {
+    try {
+      const user = await login({ email, password });
+
+      if (user?.email) {
+        Alert.alert('Login Success', user.email);
+      }
+    } catch (e) {
+      Alert.alert('Login Error');
+    }
+  }, [email, password]);
 
   const onPressSignup = useCallback(() => {
     navigation.navigate('Signup');
