@@ -1,11 +1,12 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from '@emotion/native';
 
 import { Button, Image, Input } from '../components';
 import image from '../utils/image';
 import { removeWhiteSpace, validateEmail } from '../utils/common';
+import { signup } from '../utils/firebase';
 
 const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   flex: 1,
@@ -100,7 +101,15 @@ const Signup = () => {
     setPasswordCheck(removeWhiteSpace(text));
   }, []);
 
-  const onPress = useCallback(() => {}, []);
+  const onPress = useCallback(async () => {
+    try {
+      const user = await signup({ email, password });
+
+      Alert.alert('회원가입 완료');
+    } catch (e) {
+      Alert.alert('회원가입 실패', e.message);
+    }
+  }, [email, password]);
 
   return (
     <KeyboardAwareScrollView>
