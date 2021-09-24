@@ -4,7 +4,7 @@
   "description": "Creating Zoom application using NodeJS, WebRTC and WebSocket",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/server.ts -e ts,pug -ignore src/public/*"
   },
   "dependencies": {
     "express": "^4.17.1",
