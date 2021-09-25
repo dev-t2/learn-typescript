@@ -1,6 +1,5 @@
-// const ul = document.querySelector('ul');
-const form = document.querySelector('form');
-const input = form.querySelector('input');
+const nicknameForm = document.querySelector('#nickname');
+const messageForm = document.querySelector('#message');
 
 const socket = new WebSocket(`ws://${window.location.host}`);
 
@@ -8,20 +7,37 @@ socket.addEventListener('open', () => {
   console.log('Connected to WebSocket 😃');
 });
 
-socket.addEventListener('message', async (message) => {
-  const data = await message.data.text();
+socket.addEventListener('message', async ({ data }) => {
+  const messageList = document.querySelector('ul');
+  const message = document.createElement('li');
 
-  console.log(data);
+  message.innerText = await data.text();
+
+  messageList.append(message);
 });
 
 socket.addEventListener('close', () => {
   console.log('Disconnected from WebSocket 😥');
 });
 
-form.addEventListener('submit', (event) => {
+const makeData = (type: 'nickname' | 'message', payload: string) => {
+  return JSON.stringify({ type, payload });
+};
+
+nicknameForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  socket.send(input.value);
+  const nickname = nicknameForm.querySelector('input');
 
-  input.value = '';
+  socket.send(makeData('nickname', nickname.value));
+});
+
+messageForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const message = messageForm.querySelector('input');
+
+  socket.send(makeData('message', message.value));
+
+  message.value = '';
 });

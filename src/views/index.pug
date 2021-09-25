@@ -4,14 +4,24 @@ html(lang="ko")
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
     link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+
     title Zoom
+
   body 
     header 
       h1 Zoom
+      
     main
-      ul 
-      form
+      form#nickname
+        input(type="text", required, placeholder="닉네임을 입력해주세요")
+        button 저장하기
+
+      ul
+
+      form#message
         input(type="text", required, placeholder="메세지를 입력해주세요")
         button 보내기
+
     script(src="/public/build/client.js") 
