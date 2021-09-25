@@ -7,11 +7,11 @@ socket.addEventListener('open', () => {
   console.log('Connected to WebSocket 😃');
 });
 
-socket.addEventListener('message', async ({ data }) => {
+socket.addEventListener('message', ({ data }) => {
   const messageList = document.querySelector('ul');
   const message = document.createElement('li');
 
-  message.innerText = await data.text();
+  message.innerText = data;
 
   messageList.append(message);
 });
@@ -29,7 +29,7 @@ nicknameForm.addEventListener('submit', (event) => {
 
   const nickname = nicknameForm.querySelector('input');
 
-  socket.send(makeData('nickname', nickname.value));
+  socket.send(makeData('nickname', nickname.value.trim()));
 });
 
 messageForm.addEventListener('submit', (event) => {
@@ -37,7 +37,7 @@ messageForm.addEventListener('submit', (event) => {
 
   const message = messageForm.querySelector('input');
 
-  socket.send(makeData('message', message.value));
+  socket.send(makeData('message', message.value.trim()));
 
   message.value = '';
 });
