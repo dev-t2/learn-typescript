@@ -16,11 +16,15 @@ app.get('/*', (req, res) => res.redirect('/'));
 const server = http.createServer(app);
 const webSocket = new WebSocket.Server({ server });
 
+let sockets: WebSocket[] = [];
+
 webSocket.on('connection', (socket) => {
+  sockets = [...sockets, socket];
+
   console.log('Connected to Client 😃');
 
   socket.on('message', (message) => {
-    socket.send(message.toString('utf8'));
+    sockets.forEach((socket) => socket.send(message));
   });
 
   socket.on('close', () => {

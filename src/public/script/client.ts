@@ -8,8 +8,10 @@ socket.addEventListener('open', () => {
   console.log('Connected to WebSocket 😃');
 });
 
-socket.addEventListener('message', (message) => {
-  console.log(message.data);
+socket.addEventListener('message', async (message) => {
+  const data = await message.data.text();
+
+  console.log(data);
 });
 
 socket.addEventListener('close', () => {
@@ -20,4 +22,6 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   socket.send(input.value);
+
+  input.value = '';
 });
