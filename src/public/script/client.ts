@@ -13,7 +13,7 @@ socket.addEventListener('message', (message) => {
 });
 
 socket.addEventListener('close', () => {
-  console.log('Disconnected from WebSocket 😅');
+  console.log('Disconnected from WebSocket 😥');
 });
 
 form.addEventListener('submit', (event) => {

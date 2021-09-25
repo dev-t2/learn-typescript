@@ -20,11 +20,11 @@ webSocket.on('connection', (socket) => {
   console.log('Connected to Client 😃');
 
   socket.on('message', (message) => {
-    socket.send(message);
+    socket.send(message.toString('utf8'));
   });
 
   socket.on('close', () => {
-    console.log('Disconnected from Client 😅');
+    console.log('Disconnected from Client 😥');
   });
 });
 
