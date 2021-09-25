@@ -2,8 +2,8 @@
 
 - NodeJS: https://nodejs.org/ko/
 - TS Node: https://www.npmjs.com/package/ts-node
-- Nodemon: https://www.npmjs.com/package/nodemon
 - ESLint: https://eslint.org/docs/user-guide/getting-started
+- Nodemon: https://www.npmjs.com/package/nodemon
 - Express: https://expressjs.com/ko/
   - @types/express: https://www.npmjs.com/package/@types/express
 - Pug: https://www.npmjs.com/package/pug
