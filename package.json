@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "cd ./src/public && tsc",
-    "dev": "nodemon src/server.ts -e ts,pug -ignore src/public/*"
+    "dev": "nodemon src/server.ts -e ts,pug --ignore src/public/*"
   },
   "dependencies": {
     "express": "^4.17.1",
