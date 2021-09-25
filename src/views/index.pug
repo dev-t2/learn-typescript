@@ -10,5 +10,8 @@ html(lang="ko")
     header 
       h1 Zoom
     main
-      h2 Welcome to Zoom
-    script(src="/public/script/client.js") 
+      ul 
+      form
+        input(type="text", required, placeholder="메세지를 입력해주세요")
+        button 보내기
+    script(src="/public/build/client.js") 

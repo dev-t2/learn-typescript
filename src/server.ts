@@ -20,7 +20,7 @@ webSocket.on('connection', (socket) => {
   console.log('Connected to Client 😃');
 
   socket.on('message', (message) => {
-    console.log(`Client Message: ${message}`);
+    socket.send(message);
   });
 
   socket.on('close', () => {
