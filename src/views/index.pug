@@ -14,14 +14,6 @@ html(lang="ko")
       h1 Zoom
       
     main
-      form#nickname
-        input(type="text", required, placeholder="닉네임을 입력해주세요")
-        button 저장하기
-
-      ul
-
-      form#message
-        input(type="text", required, placeholder="메세지를 입력해주세요")
-        button 보내기
-
-    script(src="/public/build/client.js") 
+      
+    script(src="/socket.io/socket.io.js") 
+    script(src="/public/script/client.js") 
