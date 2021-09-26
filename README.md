@@ -1,7 +1,7 @@
 # References
 
 - NodeJS: https://nodejs.org/ko/
-- TS Node: https://www.npmjs.com/package/ts-node
+- TSNode: https://www.npmjs.com/package/ts-node
 - ESLint: https://eslint.org/docs/user-guide/getting-started
 - Nodemon: https://www.npmjs.com/package/nodemon
 - Express: https://expressjs.com/ko/
@@ -11,3 +11,4 @@
 - MVP: https://andybrewer.github.io/mvp/
 - WS: https://www.npmjs.com/package/ws
   - @types/ws: https://www.npmjs.com/package/@types/ws
+- SocketIO: https://www.npmjs.com/package/socket.io
