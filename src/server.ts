@@ -17,10 +17,10 @@ const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
-  socket.on('enter_room', (socket, done) => {
-    console.log(socket);
+  socket.on('enter_room', (arg, callback) => {
+    console.log(arg);
 
-    setTimeout(() => done(), 10000);
+    setTimeout(() => callback('Done'), 10000);
   });
 });
 

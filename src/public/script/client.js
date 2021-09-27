@@ -7,8 +7,8 @@ form.addEventListener('submit', (event) => {
 
   const input = form.querySelector('input');
 
-  socket.emit('enter_room', { payload: input.value }, () => {
-    console.log('Server is done');
+  socket.emit('enter_room', { payload: input.value }, (response) => {
+    console.log(response);
   });
 
   input.value = '';
