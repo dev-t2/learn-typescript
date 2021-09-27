@@ -11,6 +11,4 @@
 - MVP: https://andybrewer.github.io/mvp/
 - WS: https://www.npmjs.com/package/ws
   - @types/ws: https://www.npmjs.com/package/@types/ws
-- SocketIO: https://www.npmjs.com/package/socket.io
-  - Server: https://socket.io/docs/v4/server-initialization/
-  - Client: https://socket.io/docs/v4/client-initialization/
+- SocketIO: https://socket.io/
