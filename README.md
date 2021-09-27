@@ -9,6 +9,4 @@
 - Pug: https://www.npmjs.com/package/pug
   - @types/pug: https://www.npmjs.com/package/@types/pug
 - MVP: https://andybrewer.github.io/mvp/
-- WS: https://www.npmjs.com/package/ws
-  - @types/ws: https://www.npmjs.com/package/@types/ws
 - SocketIO: https://socket.io/
