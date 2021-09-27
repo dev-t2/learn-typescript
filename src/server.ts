@@ -17,42 +17,12 @@ const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
-  console.log(socket);
+  socket.on('enter_room', (socket, done) => {
+    console.log(socket);
+
+    setTimeout(() => done(), 10000);
+  });
 });
-
-// const webSocket = new WebSocket.Server({ server });
-
-// interface ISocket extends WebSocket {
-//   nickname?: string;
-// }
-
-// let sockets: ISocket[] = [];
-
-// webSocket.on('connection', (socket: ISocket) => {
-//   sockets = [...sockets, socket];
-
-//   console.log('Connected to Client 😃');
-
-//   socket.on('message', (data) => {
-//     const { type, payload } = JSON.parse(data.toString());
-
-//     if (type === 'nickname') {
-//       socket.nickname = payload;
-//     }
-
-//     if (type === 'message') {
-//       const nickname = socket.nickname ?? '익명 사용자';
-
-//       sockets.forEach((socket) => {
-//         socket.send(`${nickname}: ${payload}`);
-//       });
-//     }
-//   });
-
-//   socket.on('close', () => {
-//     console.log('Disconnected from Client 😥');
-//   });
-// });
 
 const port = 3000;
 
