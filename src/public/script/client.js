@@ -1,14 +1,22 @@
 const socket = io();
 
-const form = document.querySelector('form');
+const enter = document.querySelector('#enter');
+const enterForm = enter.querySelector('form');
+const room = document.querySelector('#room');
 
-form.addEventListener('submit', (event) => {
+room.hidden = true;
+
+enterForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const input = form.querySelector('input');
+  const input = enterForm.querySelector('input');
 
-  socket.emit('enter_room', { payload: input.value }, (response) => {
-    console.log(response);
+  socket.emit('enter', input.value, (data) => {
+    const name = room.querySelector('h2');
+
+    enter.hidden = true;
+    room.hidden = false;
+    name.innerText = `채팅방 이름: ${data}`;
   });
 
   input.value = '';

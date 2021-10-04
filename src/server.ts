@@ -17,10 +17,14 @@ const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
-  socket.on('enter_room', (arg, callback) => {
-    console.log(arg);
+  socket.onAny((event) => {
+    console.log(`Socket Event: ${event}`);
+  });
 
-    setTimeout(() => callback('Done'), 10000);
+  socket.on('enter', (room: string, callback) => {
+    socket.join(room);
+
+    callback(room);
   });
 });
 
