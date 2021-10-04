@@ -1,37 +1,56 @@
 const socket = io();
 
-const enter = document.querySelector('#enter');
-const enterForm = enter.querySelector('form');
-const room = document.querySelector('#room');
+const enterEl = document.querySelector('#enter');
+const enterFormEl = enter.querySelector('form');
+const roomEl = document.querySelector('#room');
 
-room.hidden = true;
+roomEl.hidden = true;
 
 const appendMessage = (message) => {
-  const ul = room.querySelector('ul');
+  const ul = roomEl.querySelector('ul');
   const li = document.createElement('li');
 
   li.innerText = message;
   ul.appendChild(li);
 };
 
-enterForm.addEventListener('submit', (event) => {
+enterFormEl.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const input = enterForm.querySelector('input');
+  const input = enterFormEl.querySelector('input');
 
-  socket.emit('enter', input.value, (name) => {
-    const h2 = room.querySelector('h2');
+  socket.emit('enter', input.value, (room) => {
+    const h2 = roomEl.querySelector('h2');
+    const roomFormEl = roomEl.querySelector('form');
 
-    enter.hidden = true;
-    room.hidden = false;
-    h2.innerText = `채팅방 이름: ${name}`;
+    enterEl.hidden = true;
+    roomEl.hidden = false;
+    h2.innerText = `채팅방 이름: ${room}`;
+
+    roomFormEl.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const input = roomFormEl.querySelector('input');
+
+      socket.emit('message', room, input.value, (message) => {
+        appendMessage(message);
+      });
+
+      input.value = '';
+    });
   });
 
   input.value = '';
 });
 
 socket.on('welcome', () => {
-  console.log('dsadas');
+  appendMessage('님이 들어왔습니다.');
+});
 
-  appendMessage('방에 입장하셨습니다');
+socket.on('message', (message) => {
+  appendMessage(message);
+});
+
+socket.on('bye', () => {
+  appendMessage('님이 나갔습니다.');
 });

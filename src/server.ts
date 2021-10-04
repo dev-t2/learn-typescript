@@ -28,6 +28,18 @@ io.on('connection', (socket) => {
 
     socket.to(room).emit('welcome');
   });
+
+  socket.on('disconnecting', () => {
+    socket.rooms.forEach((room) => {
+      socket.to(room).emit('bye');
+    });
+  });
+
+  socket.on('message', (room: string, message: string, callback) => {
+    socket.to(room).emit('message', message);
+
+    callback(message);
+  });
 });
 
 const port = 3000;
