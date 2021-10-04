@@ -14,16 +14,17 @@ html(lang="ko")
       h1 Zoom
       
     main
-      div#enter
+      div#infomation
         form
-          input(type="text", placeholder="채팅방 이름", required) 
+          input#nickname(type="text", placeholder="닉네임을 입력해주세요", required) 
+          input#room-name(type="text", placeholder="채팅방 이름을 입력해주세요", required) 
           button 들어가기
 
       div#room
         h2
         ul
         form
-          input(type="text", placeholder="메시지를 입력해주세요", required) 
+          input#message(type="text", placeholder="메시지를 입력해주세요", required) 
           button 전송하기
 
     script(src="/socket.io/socket.io.js") 

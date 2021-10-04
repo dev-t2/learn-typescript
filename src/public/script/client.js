@@ -1,56 +1,58 @@
 const socket = io();
 
-const enterEl = document.querySelector('#enter');
-const enterFormEl = enter.querySelector('form');
-const roomEl = document.querySelector('#room');
+const infomationContainer = document.querySelector('#infomation');
+const infomationForm = infomationContainer.querySelector('form');
+const roomContainer = document.querySelector('#room');
 
-roomEl.hidden = true;
+roomContainer.hidden = true;
 
 const appendMessage = (message) => {
-  const ul = roomEl.querySelector('ul');
-  const li = document.createElement('li');
+  const messagesEl = roomContainer.querySelector('ul');
+  const createdMessageEl = document.createElement('li');
 
-  li.innerText = message;
-  ul.appendChild(li);
+  createdMessageEl.innerText = message;
+  messagesEl.appendChild(createdMessageEl);
 };
 
-enterFormEl.addEventListener('submit', (event) => {
+infomationForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const input = enterFormEl.querySelector('input');
+  const nicknameInput = infomationForm.querySelector('#nickname');
+  const roomNameInput = infomationForm.querySelector('#room-name');
 
-  socket.emit('enter', input.value, (room) => {
-    const h2 = roomEl.querySelector('h2');
-    const roomFormEl = roomEl.querySelector('form');
+  socket.emit('enter', nicknameInput.value, roomNameInput.value, (roomName) => {
+    const roomNameEl = roomContainer.querySelector('h2');
+    const roomForm = roomContainer.querySelector('form');
 
-    enterEl.hidden = true;
-    roomEl.hidden = false;
-    h2.innerText = `채팅방 이름: ${room}`;
+    infomationContainer.hidden = true;
+    roomContainer.hidden = false;
+    roomNameEl.innerText = `채팅방 이름: ${roomName}`;
 
-    roomFormEl.addEventListener('submit', (event) => {
+    roomForm.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const input = roomFormEl.querySelector('input');
+      const messageInput = roomForm.querySelector('#message');
 
-      socket.emit('message', room, input.value, (message) => {
+      socket.emit('message', roomName, messageInput.value, (message) => {
         appendMessage(message);
       });
 
-      input.value = '';
+      messageInput.value = '';
     });
   });
 
-  input.value = '';
+  nicknameInput.value = '';
+  roomNameInput.value = '';
 });
 
-socket.on('welcome', () => {
-  appendMessage('님이 들어왔습니다.');
+socket.on('welcome', (nickname) => {
+  appendMessage(`${nickname} 님이 들어왔습니다.`);
 });
 
 socket.on('message', (message) => {
   appendMessage(message);
 });
 
-socket.on('bye', () => {
-  appendMessage('님이 나갔습니다.');
+socket.on('bye', (nickname) => {
+  appendMessage(`${nickname} 님이 나갔습니다.`);
 });

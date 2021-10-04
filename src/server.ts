@@ -1,7 +1,7 @@
 import express from 'express';
 import { join } from 'path';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 const app = express();
 
@@ -16,29 +16,34 @@ app.get('/*', (_, res) => res.redirect('/'));
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-io.on('connection', (socket) => {
+interface ISocket extends Socket {
+  nickname?: string;
+}
+
+io.on('connection', (socket: ISocket) => {
   socket.onAny((event) => {
     console.log(`Socket Event: ${event}`);
   });
 
-  socket.on('enter', (room: string, callback) => {
-    socket.join(room);
+  socket.on('enter', (nickname: string, roomName: string, callback) => {
+    socket.nickname = nickname;
+    socket.join(roomName);
 
-    callback(room);
+    callback(roomName);
 
-    socket.to(room).emit('welcome');
+    socket.to(roomName).emit('welcome', nickname);
+  });
+
+  socket.on('message', (roomName: string, message: string, callback) => {
+    socket.to(roomName).emit('message', `${socket.nickname}: ${message}`);
+
+    callback(message);
   });
 
   socket.on('disconnecting', () => {
     socket.rooms.forEach((room) => {
-      socket.to(room).emit('bye');
+      socket.to(room).emit('bye', socket.nickname);
     });
-  });
-
-  socket.on('message', (room: string, message: string, callback) => {
-    socket.to(room).emit('message', message);
-
-    callback(message);
   });
 });
 
