@@ -7,11 +7,11 @@ const roomContainer = document.querySelector('#room');
 roomContainer.hidden = true;
 
 const appendMessage = (message) => {
-  const messagesEl = roomContainer.querySelector('ul');
-  const createdMessageEl = document.createElement('li');
+  const ul = roomContainer.querySelector('ul');
+  const li = document.createElement('li');
 
-  createdMessageEl.innerText = message;
-  messagesEl.appendChild(createdMessageEl);
+  li.innerText = message;
+  ul.appendChild(li);
 };
 
 infomationForm.addEventListener('submit', (event) => {
@@ -26,7 +26,7 @@ infomationForm.addEventListener('submit', (event) => {
 
     infomationContainer.hidden = true;
     roomContainer.hidden = false;
-    roomNameEl.innerText = `채팅방 이름: ${roomName}`;
+    roomNameEl.innerText = `채팅방: ${roomName}`;
 
     roomForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -45,14 +45,14 @@ infomationForm.addEventListener('submit', (event) => {
   roomNameInput.value = '';
 });
 
-socket.on('welcome', (nickname) => {
-  appendMessage(`${nickname} 님이 들어왔습니다.`);
+socket.on('welcome', (userName) => {
+  appendMessage(`${userName} 님이 들어왔습니다.`);
 });
 
 socket.on('message', (message) => {
   appendMessage(message);
 });
 
-socket.on('bye', (nickname) => {
-  appendMessage(`${nickname} 님이 나갔습니다.`);
+socket.on('bye', (userName) => {
+  appendMessage(`${userName} 님이 나갔습니다.`);
 });
