@@ -16,6 +16,14 @@ app.get('/*', (_, res) => res.redirect('/'));
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
+const getRooms = () => {
+  const { rooms, sids } = io.sockets.adapter;
+
+  return [...rooms.keys()].reduce((rooms: string[], room) => {
+    return sids.get(room) ? rooms : [...rooms, room];
+  }, []);
+};
+
 interface ISocket extends Socket {
   nickname?: string;
 }
@@ -32,6 +40,8 @@ io.on('connection', (socket: ISocket) => {
     callback(roomName);
 
     socket.to(roomName).emit('welcome', nickname);
+
+    console.log(getRooms());
   });
 
   socket.on('message', (roomName: string, message: string, callback) => {
