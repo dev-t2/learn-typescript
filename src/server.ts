@@ -41,7 +41,7 @@ io.on('connection', (socket: ISocket) => {
 
     socket.to(roomName).emit('welcome', nickname);
 
-    console.log(getRooms());
+    io.sockets.emit('rooms', getRooms());
   });
 
   socket.on('message', (roomName: string, message: string, callback) => {
@@ -52,8 +52,12 @@ io.on('connection', (socket: ISocket) => {
 
   socket.on('disconnecting', () => {
     socket.rooms.forEach((room) => {
-      socket.to(room).emit('bye', socket.nickname);
+      socket.to(room).emit('leave', socket.nickname);
     });
+  });
+
+  socket.on('disconnect', () => {
+    io.sockets.emit('rooms', getRooms());
   });
 });
 

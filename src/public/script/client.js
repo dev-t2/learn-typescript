@@ -20,26 +20,36 @@ infomationForm.addEventListener('submit', (event) => {
   const nicknameInput = infomationForm.querySelector('#nickname');
   const roomNameInput = infomationForm.querySelector('#room-name');
 
-  socket.emit('enter', nicknameInput.value, roomNameInput.value, (roomName) => {
-    const roomNameEl = roomContainer.querySelector('h2');
-    const roomForm = roomContainer.querySelector('form');
+  socket.emit(
+    'enter',
+    nicknameInput.value.trim(),
+    roomNameInput.value.trim(),
+    (roomName) => {
+      const roomNameEl = roomContainer.querySelector('h2');
+      const roomForm = roomContainer.querySelector('form');
 
-    infomationContainer.hidden = true;
-    roomContainer.hidden = false;
-    roomNameEl.innerText = `채팅방: ${roomName}`;
+      infomationContainer.hidden = true;
+      roomContainer.hidden = false;
+      roomNameEl.innerText = `채팅방: ${roomName}`;
 
-    roomForm.addEventListener('submit', (event) => {
-      event.preventDefault();
+      roomForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-      const messageInput = roomForm.querySelector('#message');
+        const messageInput = roomForm.querySelector('#message');
 
-      socket.emit('message', roomName, messageInput.value, (message) => {
-        appendMessage(message);
+        socket.emit(
+          'message',
+          roomName,
+          messageInput.value.trim(),
+          (message) => {
+            appendMessage(message);
+          }
+        );
+
+        messageInput.value = '';
       });
-
-      messageInput.value = '';
-    });
-  });
+    }
+  );
 
   nicknameInput.value = '';
   roomNameInput.value = '';
@@ -53,6 +63,27 @@ socket.on('message', (message) => {
   appendMessage(message);
 });
 
-socket.on('bye', (userName) => {
+socket.on('leave', (userName) => {
   appendMessage(`${userName} 님이 나갔습니다.`);
+});
+
+socket.on('rooms', (rooms) => {
+  const ul = infomationContainer.querySelector('ul');
+
+  ul.innerHTML = '';
+
+  if (rooms.length > 0) {
+    rooms.forEach((room) => {
+      const li = document.createElement('li');
+
+      li.innerText = room;
+      li.addEventListener('click', () => {
+        const roomNameInput = infomationForm.querySelector('#room-name');
+
+        roomNameInput.value = room;
+      });
+
+      ul.appendChild(li);
+    });
+  }
 });

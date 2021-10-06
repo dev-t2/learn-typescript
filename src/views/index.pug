@@ -7,14 +7,17 @@ html(lang="ko")
 
     link(rel="stylesheet", href="https://unpkg.com/mvp.css")
 
-    title SocketIO & WebRTC
+    title SocketIO &amp; WebRTC
 
   body 
     header 
-      h1 SocketIO & WebRTC
+      h1 SocketIO &amp; WebRTC
       
     main
       div#infomation
+        h2 채팅방 목록
+        ul
+
         form
           input#nickname(type="text", placeholder="닉네임을 입력해주세요", required) 
           input#room-name(type="text", placeholder="채팅방 이름을 입력해주세요", required) 
@@ -23,6 +26,7 @@ html(lang="ko")
       div#room
         h2
         ul
+
         form
           input#message(type="text", placeholder="메시지를 입력해주세요", required) 
           button 전송하기
