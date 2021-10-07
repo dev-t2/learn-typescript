@@ -3,9 +3,25 @@ const socket = io();
 const infomationContainer = document.querySelector('#infomation');
 const infomationForm = infomationContainer.querySelector('form');
 const roomContainer = document.querySelector('#room');
+const videoEl = roomContainer.querySelector('video');
 const roomNameEl = roomContainer.querySelector('h2');
 
 roomContainer.hidden = true;
+
+const getMedia = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false,
+    });
+
+    videoEl.srcObject = stream;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+getMedia();
 
 const appendMessage = (message) => {
   const ul = roomContainer.querySelector('ul');

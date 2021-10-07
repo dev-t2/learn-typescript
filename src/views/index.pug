@@ -17,16 +17,15 @@ html(lang="ko")
       div#infomation
         h2 채팅방 목록
         ul
-
         form
           input#nickname(type="text", placeholder="닉네임을 입력해주세요", required) 
           input#room-name(type="text", placeholder="채팅방 이름을 입력해주세요", required) 
           button 들어가기
 
       div#room
+        video(autoplay, playsinline, width="400", height="400")
         h2
         ul
-
         form
           input#message(type="text", placeholder="메시지를 입력해주세요", required) 
           button 전송하기
