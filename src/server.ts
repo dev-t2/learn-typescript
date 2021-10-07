@@ -24,6 +24,10 @@ const getRooms = () => {
   }, []);
 };
 
+const counter = (roomName: string) => {
+  return io.sockets.adapter.rooms.get(roomName)?.size ?? 0;
+};
+
 interface ISocket extends Socket {
   nickname?: string;
 }
@@ -37,9 +41,9 @@ io.on('connection', (socket: ISocket) => {
     socket.nickname = nickname;
     socket.join(roomName);
 
-    callback(roomName);
+    callback(roomName, counter(roomName));
 
-    socket.to(roomName).emit('welcome', nickname);
+    socket.to(roomName).emit('welcome', nickname, roomName, counter(roomName));
 
     io.sockets.emit('rooms', getRooms());
   });
@@ -51,8 +55,10 @@ io.on('connection', (socket: ISocket) => {
   });
 
   socket.on('disconnecting', () => {
-    socket.rooms.forEach((room) => {
-      socket.to(room).emit('leave', socket.nickname);
+    socket.rooms.forEach((roomName) => {
+      socket
+        .to(roomName)
+        .emit('leave', socket.nickname, roomName, counter(roomName) - 1);
     });
   });
 
