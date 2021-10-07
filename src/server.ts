@@ -2,6 +2,7 @@ import express from 'express';
 import { join } from 'path';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
+import { instrument } from '@socket.io/admin-ui';
 
 const app = express();
 
@@ -14,7 +15,14 @@ app.get('/', (_, res) => res.render('index'));
 app.get('/*', (_, res) => res.redirect('/'));
 
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: ['https://admin.socket.io'],
+    credentials: true,
+  },
+});
+
+instrument(io, { auth: false });
 
 const getRooms = () => {
   const { rooms, sids } = io.sockets.adapter;
@@ -70,5 +78,6 @@ io.on('connection', (socket: ISocket) => {
 const port = 3000;
 
 httpServer.listen(port, () => {
-  console.log(`Running server at http://localhost:${port}`);
+  console.log(`Running http server at http://localhost:${port}`);
+  console.log('Running instrument at https://admin.socket.io');
 });

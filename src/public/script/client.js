@@ -30,6 +30,7 @@ infomationForm.addEventListener('submit', (event) => {
 
       infomationContainer.hidden = true;
       roomContainer.hidden = false;
+
       roomNameEl.innerText = `채팅방: ${roomName} (${count})`;
 
       roomForm.addEventListener('submit', (event) => {
@@ -81,6 +82,7 @@ socket.on('rooms', (rooms) => {
       const li = document.createElement('li');
 
       li.innerText = room;
+
       li.addEventListener('click', () => {
         const roomNameInput = infomationForm.querySelector('#room-name');
 
