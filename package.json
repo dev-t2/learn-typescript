@@ -3,6 +3,9 @@
   "scripts": {},
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.3.1",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.3",
     "typescript": "^5.1.3"
   }
 }
