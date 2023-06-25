@@ -1,6 +1,5 @@
 {
   "name": "learn-typescript-types",
-  "scripts": {},
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.1",
