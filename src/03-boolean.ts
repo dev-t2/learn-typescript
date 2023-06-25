@@ -1,3 +1,5 @@
+// let isSuccess: boolean = false;
+
 let isSuccess = false;
 
 isSuccess = true;
