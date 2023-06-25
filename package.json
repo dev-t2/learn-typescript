@@ -1,5 +1,8 @@
 {
   "name": "learn-typescript-types",
   "scripts": {},
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
 }
