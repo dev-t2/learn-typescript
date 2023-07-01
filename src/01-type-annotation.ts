@@ -17,7 +17,7 @@ const info: {
 
 console.log(info);
 
-const printMessage = (message: string, isPrint?: boolean) => {
+const printMessage = (message: string, isPrint?: boolean): void => {
   if (isPrint) {
     console.log({ message });
   }
