@@ -1,26 +1,22 @@
-const username: string = 'TypeScript';
-const age: number = 35;
-const isSuccess: boolean = true;
+const str: string = 'TypeScript';
+const num: number = 15;
+const bool: boolean = true;
 
-console.log({ username, age, isSuccess });
+console.log({ str, num, bool });
 
-const info: {
-  username: string;
-  age: number;
-  isSuccess: boolean;
-  gender?: string;
+const obj: {
+  str: string;
+  num: number;
+  bool?: boolean;
 } = {
-  username: 'TypeScript',
-  age: 35,
-  isSuccess: true,
+  str: 'TypeScript',
+  num: 15,
 };
 
-console.log(info);
+console.log(obj);
 
-const printMessage = (message: string, isPrint?: boolean): void => {
-  if (isPrint) {
-    console.log({ message });
-  }
+const func = (str: string, bool?: boolean): void => {
+  console.log({ str, bool });
 };
 
-printMessage('Print Message');
+func('TypeScript');
