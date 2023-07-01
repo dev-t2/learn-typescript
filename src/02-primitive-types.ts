@@ -1,7 +1,6 @@
-const num1: number = 1;
-const num2: bigint = 12345679n;
+const num: number = 1;
 
-console.log({ num1, num2 });
+console.log({ num });
 
 const str: string = 'TypeScript';
 
