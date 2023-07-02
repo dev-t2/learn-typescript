@@ -1,9 +1,9 @@
 declare const anyValue: any;
 declare const unknownValue: unknown;
 
-// const num1: number = anyValue;
+const num1: number = anyValue;
 
-// console.log(num1);
+console.log(num1);
 
 // const num2: number = unknownValue;
 
