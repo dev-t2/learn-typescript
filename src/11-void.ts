@@ -19,3 +19,5 @@ const getMessage = (message: string) => {
 // };
 
 // const value: number = getMessage('message');
+
+getMessage('Message');
